@@ -14,9 +14,6 @@ const { demandOption } = require('yargs')
 const yargs = require('yargs')
 const notes = require('./notes.js')
 
-
-
-
 yargs.command({
 
     command: 'add',
@@ -59,8 +56,15 @@ yargs.command({
 
     command: 'read',
     describe: 'Read a note!',
-    handler(){
-        console.log('Reading a note')
+    builder:{
+        title:{
+            describe:'Note Title',
+            demandOption:true,
+            type:'string'
+        }
+    },
+    handler(argv){
+        notes.readNote(argv.title)
     }
 })
 
@@ -69,7 +73,7 @@ yargs.command({
     command: 'list',
     describe: 'list notes!',
     handler(){
-        console.log('listing out all notes')
+        notes.listNote()
     }
 })
 
